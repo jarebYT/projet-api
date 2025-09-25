@@ -8,7 +8,7 @@ const multerMiddleware = require('../middleware/multer.middleware');
 router.get('/',postController.getAll);
 router.get('/:id',postController.getById);
 
-router.post('/',postController.create);
+router.post('/',auth ,postController.create);
 
 router.put('/:id',postController.update);
 

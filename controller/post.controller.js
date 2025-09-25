@@ -26,7 +26,7 @@ exports.getById = async (req, res) => {
 
 exports.create = async (req, res, next) => {
     try {
-        let body = JSON.parse(req.body.post);
+        let body = req.body;
         if(req.file){
             body.picture = req.file.filename
         }
@@ -38,6 +38,7 @@ exports.create = async (req, res, next) => {
         });
         res.status(201).json(post);
     } catch (e) {
+        console.error(e);
         res.status(400).json({ error: "Impossible de créer le post !" })
     }
 }
