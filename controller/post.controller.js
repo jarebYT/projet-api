@@ -34,7 +34,7 @@ exports.create = async (req, res, next) => {
             title : req.body.title,
             content : req.body.content,
             image_url : req.body.image_url,
-            user_id : req.body.user_id
+            user_id : req.token.id
         });
         res.status(201).json(post);
     } catch (e) {
