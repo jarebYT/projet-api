@@ -6,7 +6,7 @@ exports.getAll = async (req, res) => {
         let commentList = await Comment.findAll();
         res.status(200).json(commentList);
     } catch (e) {
-        res.status(400).json({ error: "Impossible de récupérer les produits" })
+        res.status(400).json({ error: "Impossible de récupérer les commentaires" })
     }
 }
 
@@ -37,7 +37,7 @@ exports.create = async (req, res, next) => {
         });
         res.status(201).json(comment);
     } catch (e) {
-        res.status(400).json({ error: "Impossible d'ajouter le commentaire' })
+        res.status(400).json({ error: "Impossible d'ajouter le commentaire" })
     }
 }
 
@@ -78,4 +78,4 @@ exports.delete = async (req, res) => {
     } catch (e) {
         res.status(400).json({ error: "Impossible de supprimer ce commentaire" })
     }
-}}
+}
