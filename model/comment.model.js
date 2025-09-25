@@ -1,5 +1,5 @@
-const {DataTypes} = require('sequelize'); //appel sequalize
-const db = require('./index'); // appel l'index
+const {DataTypes} = require('sequelize'); //appelle sequalize
+const db = require('./index'); // appelle l'index
 
 const Comment = db.define('Comment',{// défini les différentes données ainsi que leurs types pour les commentaires
     content: {

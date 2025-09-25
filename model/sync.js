@@ -7,8 +7,8 @@ require("./user.model");   // si tu as d'autres modèles
 require("./comment.model"); // idem
 
 const sync = async () => {
-    await db.sync({alter: true});
+    await db.sync({alter: true}); // ajoute et ou modifie les données sur la table
     console.log("Synchronisation réussie");
 }
 
-sync();
+sync(); // appelle de la fonction de synchronisation

@@ -1,4 +1,4 @@
-const { Sequelize } = require("sequelize"); //appel sequalize
+const { Sequelize } = require("sequelize"); //appelle sequalize
 require('dotenv').config();
 // on a besoin de dotenv pour récuperer les données du .env
 
