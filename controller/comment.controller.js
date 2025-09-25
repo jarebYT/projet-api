@@ -61,7 +61,7 @@ exports.update = async (req, res, next) => {
             comment.post_id = req.body.post_id;
         }
         comment.save();
-        res.status(201).json(product);
+        res.status(201).json(comment);
     } catch (e) {
         res.status(400).json({ error: "Impossible de modifier ce produit" })
     }
