@@ -2,7 +2,7 @@ const {DataTypes} = require('sequelize');
 const db = require('./index');
 
 const User = db.define('User',{
-    pseudo: {
+    username: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true
