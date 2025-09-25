@@ -1,5 +1,4 @@
 const bdd = require('./index');
-const relate = require('./relation');
 
 const sync = async () => {
     await relate();
