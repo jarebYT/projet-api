@@ -1,15 +1,6 @@
 const Comment = require('./../model/comment.model');
 const Post = require('./../model/post.model');
 
-exports.getAll = async (req, res) => {
-    try {
-        let commentList = await Comment.findAll();
-        res.status(200).json(commentList);
-    } catch (e) {
-        res.status(400).json({ error: "Impossible de récupérer les produits" })
-    }
-}
-
 exports.getById = async (req, res) => {
     try {
         let comment = await Comment.findAll({
@@ -46,12 +37,12 @@ exports.create = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
     try {
-        let comment = await comment.findOne({
+        let comment = await Comment.findOne({
             where: {
                 id: req.params.id
             }
         });
-        if(req.token.id !== comment.user_Id){
+        if(req.token.id !== comment.user_id){
             return res.status(403).json('Vous n\'avez pas les droitspour commenter ce post');
         }
         if(req.body.user_id){
@@ -66,20 +57,31 @@ exports.update = async (req, res, next) => {
         comment.save();
         res.status(201).json(comment);
     } catch (e) {
+        console.error(e);
         res.status(400).json({ error: "Impossible de modifier ce commentaire" })
     }
 }
 
 exports.delete = async (req, res) => {
-    try {
-        let comment = await comment.destroy({
-            where: {
-                id: req.params.id
-            }
-        });
-        res.status(200).json(comment);
-    } catch (e) {
-        res.status(400).json({ error: "Impossible de supprimer ce commentaire" })
+  try {
+    let comment = await Comment.findOne({
+      where: { id: req.params.id }
+    });
+
+    if (!comment) {
+      return res.status(404).json({ error: "Post non trouvé" });
     }
-}
+
+    // Vérification : seul le propriétaire peut supprimer
+    if (req.token.id !== comment.user_id) {
+      return res.status(403).json({ error: "Vous n'avez pas les droits pour supprimer ce post" });
+    }
+
+    await comment.destroy(); // supprime le post
+    res.status(200).json({ message: "Post supprimé avec succès" });
+  } catch (e) {
+    console.error(e);
+    res.status(400).json({ error: "Impossible de supprimer ce post" });
+  }
+};
 
