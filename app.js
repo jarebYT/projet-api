@@ -1,6 +1,7 @@
 const express = require('express');
 const userRoute = require('./route/user.route');
-const productRoute = require('./route/product.route');
+const commentRoute = require('./route/comment.route');
+const postRoute = require('./route/post.route');
 const path = require('path');
 const relate = require('./model/relation');
 require('./model/index');
@@ -12,7 +13,8 @@ app.use(express.json());
 
 app.use('/images', express.static(path.join(__dirname, "images")));
 
-app.use('/user', userRoute);
-app.use('/product', productRoute);
+app.use('/auth', userRoute);
+app.use('/comments', commentRoute);
+app.use('/posts', postRoute);
 
 module.exports = app;
