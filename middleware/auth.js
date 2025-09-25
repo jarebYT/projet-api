@@ -12,4 +12,4 @@ const auth = (req,res,next) => {
     
 }
 
-module.exports = auth;// export l'auth
+module.exports = auth;

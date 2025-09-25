@@ -11,7 +11,7 @@
                     id: req.params.id
                 }
             });
-            res.status(200).json({id: user.id, username: user.username, email: user.email});
+            res.status(200).json({id: user.id, username: user.username, email: user.email}); // Filtre pour ne pas renvoyer le mot de passe
         }catch(e){
             res.status(404).json({error: "Impossible de récupérer les utilsateurs"})
         }

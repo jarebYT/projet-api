@@ -7,10 +7,10 @@ const path = require('path');
 require('./model/index');
 const app = express();
 
-app.use(express.json());// lance express
+app.use(express.json());
 
+// ROUTES
 app.use('/images', express.static(path.join(__dirname, "images")));
-
 app.use("/users", userRoute);
 app.use('/auth', authRoute);
 app.use('/comments', commentRoute);

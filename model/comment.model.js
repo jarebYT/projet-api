@@ -19,4 +19,4 @@ const Comment = db.define('Comment',{// défini les différentes données ainsi 
 });
 
 
-module.exports = Comment; // export les commentaires
+module.exports = Comment;

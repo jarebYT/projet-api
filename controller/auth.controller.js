@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
 require('dotenv').config();
 
-
+// Inscription d'un utilisateur
 exports.signin = async (req, res, next) => {
     try {
         const hash = bcryptjs.hashSync(req.body.password,10);
@@ -18,6 +18,7 @@ exports.signin = async (req, res, next) => {
     }
 }
 
+// Connexion d'un utilisateur
 exports.login = async (req, res, next) => {
     try {
         let user = await User.findOne({

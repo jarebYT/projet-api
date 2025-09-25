@@ -27,4 +27,4 @@ const Post = db.define('Post',{ // Détermine les données lorsque l'on creer un
     tableName: "post" // incrémente les posts dans la table "post"
 });
 
-module.exports = Post; // exporte les posts
+module.exports = Post;

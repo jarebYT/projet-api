@@ -1,7 +1,7 @@
 const {DataTypes} = require('sequelize');// appelle sequalize
 const db = require('./index');// appelle l'index
 
-const User = db.define('User',{ // défini les différentes données de l'utilisateur ainsi que leur typage
+const User = db.define('User',{ // définit les différentes données de l'utilisateur ainsi que leur typage
     username: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -20,4 +20,4 @@ const User = db.define('User',{ // défini les différentes données de l'utilis
     tableName: "user" // rajoute les données dans la table "user" de la BDD
 });
 
-module.exports = User; // exporte les utilisateurs
+module.exports = User;

@@ -1,3 +1,5 @@
+// ON UTILISE PAS MULTER AU FINAL, ON A PAS FAIT LE BONUS :)
+
 const multer = require("multer");// appelle multer 
 
 const MIME_TYPES = { // détermine les différents types qui peuvent être admis

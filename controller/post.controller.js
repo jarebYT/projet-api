@@ -1,6 +1,6 @@
 const Post = require('./../model/post.model');
 
-
+// Récupère tous les posts
 exports.getAll = async (req, res) => {
     try {
         let postList = await Post.findAll();
@@ -10,6 +10,7 @@ exports.getAll = async (req, res) => {
     }
 }
 
+// Récupère un post par identifiant.
 exports.getById = async (req, res) => {
     try {
         let post = await Post.findOne({
@@ -24,6 +25,7 @@ exports.getById = async (req, res) => {
     }
 }
 
+// Crée un post
 exports.create = async (req, res, next) => {
     try {
         let body = req.body;
@@ -43,6 +45,7 @@ exports.create = async (req, res, next) => {
     }
 }
 
+// Met à jour un post
 exports.update = async (req, res, next) => {
     try {
         let post = await Post.findOne({
@@ -73,6 +76,7 @@ exports.update = async (req, res, next) => {
     }
 }
 
+// Supprime un post
 exports.delete = async (req, res) => {
   try {
     let post = await Post.findOne({

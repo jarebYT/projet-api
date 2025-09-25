@@ -1,6 +1,7 @@
 const Comment = require('./../model/comment.model');
-const Post = require('./../model/post.model');
 
+
+// Récupère les commentaires d'un post par identifiant
 exports.getById = async (req, res) => {
     try {
         let comment = await Comment.findAll({
@@ -14,6 +15,7 @@ exports.getById = async (req, res) => {
     }
 }
 
+// Crée un commentaire
 exports.create = async (req, res, next) => {
     try {
         let body = req.body;
@@ -35,6 +37,8 @@ exports.create = async (req, res, next) => {
     }
 }
 
+
+// Met à jour un commentaire
 exports.update = async (req, res, next) => {
     try {
         let comment = await Comment.findOne({
@@ -62,6 +66,7 @@ exports.update = async (req, res, next) => {
     }
 }
 
+// Supprime un commentaire
 exports.delete = async (req, res) => {
   try {
     let comment = await Comment.findOne({

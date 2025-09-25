@@ -5,6 +5,7 @@ const commentController = require('./../controller/comment.controller');
 const auth = require('../middleware/auth');
 const multerMiddleware = require('../middleware/multer.middleware');
 
+// Routes des posts (/posts)
 router.get('/',postController.getAll);
 router.get('/:id',postController.getById);
 
