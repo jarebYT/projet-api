@@ -10,15 +10,18 @@ const Post = db.define('Post',{
     content: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
+        unique: false
+        
     },
     image_url: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true,
+        unique: false
     },
     user_id: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        unique: false
     }
 },{
     tableName: "post"
