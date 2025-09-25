@@ -50,9 +50,6 @@ exports.update = async (req, res, next) => {
                 id: req.params.id
             }
         });
-        if(req.token.id !== post.user_Id){
-            return res.status(403).json('Vous n\'avez pas les droits pour modifier ce produit');
-        }
         if(req.body.title){
             post.title = req.body.title;
         }
@@ -62,8 +59,8 @@ exports.update = async (req, res, next) => {
         if(req.body.image_url){
             post.image_url = req.body.image_url;
         }
-        if(req.body.user_Id){
-            post.user_Id = req.body.user_Id;
+        if(req.body.user_id){
+            post.user_Id = req.body.user_id;
         }
         post.save();
         res.status(201).json(post);
