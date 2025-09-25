@@ -7,8 +7,7 @@ const path = require('path');
 require('./model/index');
 const app = express();
 
-
-app.use(express.json());
+app.use(express.json());// lance express
 
 app.use('/images', express.static(path.join(__dirname, "images")));
 
