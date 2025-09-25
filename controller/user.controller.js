@@ -10,7 +10,7 @@ exports.getById = async (req,res) => {
                 id: req.params.id
             }
         });
-        res.status(200).json(user);
+        res.status(200).json({id: user.id, username: user.username, email: user.email});
     }catch(e){
         res.status(400).json({error: "Impossible de récupérer les utilsateurs"})
     }
