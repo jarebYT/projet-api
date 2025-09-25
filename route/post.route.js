@@ -10,7 +10,7 @@ router.get('/:id',postController.getById);
 
 router.post('/',auth ,postController.create);
 
-router.put('/:id',postController.update);
+router.put('/:id',auth,postController.update);
 
 router.delete('/:id',postController.delete);
 
