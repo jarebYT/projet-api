@@ -6,7 +6,7 @@ exports.getAll = async (req, res) => {
         let commentList = await Comment.findAll();
         res.status(200).json(commentList);
     } catch (e) {
-        res.status(400).json({ error: "Impossible de récupérer les produits" })
+        res.status(400).json({ error: "Impossible de récupérer les commentaires" })
     }
 }
 
@@ -37,7 +37,7 @@ exports.create = async (req, res, next) => {
         });
         res.status(201).json(comment);
     } catch (e) {
-        res.status(400).json({ error: "Impossible de créer le produit!" })
+        res.status(400).json({ error: "Impossible d'ajouter le commentaire" })
     }
 }
 
@@ -49,7 +49,7 @@ exports.update = async (req, res, next) => {
             }
         });
         if(req.token.id !== comment.user_Id){
-            return res.status(403).json('Vous n\'avez pas les droits pour modifier ce produit');
+            return res.status(403).json('Vous n\'avez pas les droitspour commenter ce post');
         }
         if(req.body.user_id){
             comment.user_id = req.body.user_id;
@@ -63,7 +63,7 @@ exports.update = async (req, res, next) => {
         comment.save();
         res.status(201).json(comment);
     } catch (e) {
-        res.status(400).json({ error: "Impossible de modifier ce produit" })
+        res.status(400).json({ error: "Impossible de modifier ce commentaire" })
     }
 }
 
@@ -76,7 +76,6 @@ exports.delete = async (req, res) => {
         });
         res.status(200).json(comment);
     } catch (e) {
-        res.status(400).json({ error: "Impossible de supprimer ce produit" })
+        res.status(400).json({ error: "Impossible de supprimer ce commentaire" })
     }
 }
-
