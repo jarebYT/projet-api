@@ -1,7 +1,7 @@
-const {DataTypes} = require('sequelize');
-const db = require('./index');
+const {DataTypes} = require('sequelize'); //appelle sequalize
+const db = require('./index'); // appelle l'index
 
-const Comment = db.define('Comment',{
+const Comment = db.define('Comment',{// défini les différentes données ainsi que leurs types pour les commentaires
     content: {
         type: DataTypes.STRING,
         allowNull: false
@@ -15,7 +15,8 @@ const Comment = db.define('Comment',{
         allowNull: false
     }
 },{
-    tableName: "comment"
+    tableName: "comment" //mets les données dans la table comment du la base de données
 });
 
-module.exports = Comment;
+
+module.exports = Comment; // export les commentaires

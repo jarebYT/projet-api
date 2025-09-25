@@ -1,7 +1,7 @@
-const {DataTypes} = require('sequelize');
-const db = require('./index');
+const {DataTypes} = require('sequelize'); // appelle sequalize
+const db = require('./index');// appel l'index
 
-const Post = db.define('Post',{
+const Post = db.define('Post',{ // Détermine les données lorsque l'on creer un post ainsi que leur typage
     title: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -24,7 +24,7 @@ const Post = db.define('Post',{
         unique: false
     }
 },{
-    tableName: "post"
+    tableName: "post" // incrémente les posts dans la table "post"
 });
 
-module.exports = Post;
+module.exports = Post; // exporte les posts
