@@ -1,5 +1,5 @@
-const comment = require('./../model/comment.model');
-
+const Comment = require('./../model/comment.model');
+const Post = require('./../model/post.model');
 
 exports.getAll = async (req, res) => {
     try {
@@ -12,12 +12,11 @@ exports.getAll = async (req, res) => {
 
 exports.getById = async (req, res) => {
     try {
-        let comment = await comment.findOne({
+        let comment = await Comment.findAll({
             where: {
-                id: req.params.id
+                post_id: req.params.id
             }
         });
-        comment.picture = "http://localhost:3000/images/" + comment.picture;
         res.status(200).json(comment);
     } catch (e) {
         res.status(400).json({ error: "Impossible de récupérer les comment" })
@@ -26,17 +25,21 @@ exports.getById = async (req, res) => {
 
 exports.create = async (req, res, next) => {
     try {
-        let body = JSON.parse(req.body.comment);
+        let body = req.body;
         if(req.file){
             body.picture = req.file.filename
         }
-        let comment = await comment.create({
+        if (!req.token.id) {
+            return res.status(403).json({ error: "Vous n'avez pas les droits pour modifier ce post" });
+        }
+        let comment = await Comment.create({
             content : req.body.content,
-            user_id : req.body.user_id,
+            user_id : req.token.id,
             post_id : req.body.post_id
         });
         res.status(201).json(comment);
     } catch (e) {
+        console.error(e);
         res.status(400).json({ error: "Impossible d'ajouter le commentaire" })
     }
 }
