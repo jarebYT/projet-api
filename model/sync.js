@@ -7,7 +7,7 @@ require("./user.model");   // si tu as d'autres modèles
 require("./comment.model"); // idem
 
 const sync = async () => {
-    await bdd.sync({alter: true});
+    await db.sync({alter: true});
     console.log("Synchronisation réussie");
 }
 
