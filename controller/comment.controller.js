@@ -35,7 +35,7 @@ exports.create = async (req, res, next) => {
             user_id : req.body.user_id,
             post_id : req.body.post_id
         });
-        res.status(201).json(product);
+        res.status(201).json(comment);
     } catch (e) {
         res.status(400).json({ error: "Impossible de créer le produit!" })
     }
@@ -43,24 +43,24 @@ exports.create = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
     try {
-        let product = await Product.findOne({
+        let comment = await comment.findOne({
             where: {
                 id: req.params.id
             }
         });
-        if(req.token.id !== product.userId){
+        if(req.token.id !== comment.user_Id){
             return res.status(403).json('Vous n\'avez pas les droits pour modifier ce produit');
         }
-        if(req.body.name){
-            product.name = req.body.name;
+        if(req.body.user_id){
+            comment.user_id = req.body.user_id;
         }
-        if(req.body.description){
-            product.description = req.body.description;
+        if(req.body.content){
+            comment.content = req.body.content;
         }
-        if(req.body.price){
-            product.price = req.body.price;
+        if(req.body.post_id){
+            comment.post_id = req.body.post_id;
         }
-        product.save();
+        comment.save();
         res.status(201).json(product);
     } catch (e) {
         res.status(400).json({ error: "Impossible de modifier ce produit" })
@@ -69,12 +69,12 @@ exports.update = async (req, res, next) => {
 
 exports.delete = async (req, res) => {
     try {
-        let product = await Product.destroy({
+        let comment = await comment.destroy({
             where: {
                 id: req.params.id
             }
         });
-        res.status(200).json(product);
+        res.status(200).json(comment);
     } catch (e) {
         res.status(400).json({ error: "Impossible de supprimer ce produit" })
     }
