@@ -12,7 +12,7 @@ router.post('/',auth ,postController.create);
 
 router.put('/:id',auth,postController.update);
 
-router.delete('/:id',postController.delete);
+router.delete('/:id',auth,postController.delete);
 
 // Routes des commentaires (/posts/:id/comments)
 router.get('/:id/comments',commentController.getById);
