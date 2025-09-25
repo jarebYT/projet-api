@@ -36,16 +36,10 @@ exports.signin = async (req, res, next) => {
     }
 };
 
-/**
- * Contrôleur de connexion (login).
- * - Recherche l'utilisateur par identifiants.
- * - Compare le mot de passe en clair (fourni) avec le hash stocké.
- * - Émet un JWT signé si authentification OK.
- */
+// Authentifie un utilisateur et lui renvoie un JWT.
 exports.login = async (req, res, next) => {
     try {
         // Recherche de l'utilisateur.
-        // ⚠️ Ici la recherche exige username ET email à la fois.
         let user = await User.findOne({
             where: {
                 username: req.body.username,
@@ -53,7 +47,7 @@ exports.login = async (req, res, next) => {
             }
         });
 
-        // Si inconnu: message générique (évite l'énumération des comptes).
+        // Si inconnu: message générique.
         if (!user) {
             // 404 utilisé ici, mais 401 (Unauthorized) est plus canonique pour un échec d'authent.
             return res.status(404).json({ error: "Email ou mot de passe incorrect!" });
@@ -69,7 +63,6 @@ exports.login = async (req, res, next) => {
         const token = jwt.sign(
             { id: user.id },
             process.env.JWT_KEY
-            // , { expiresIn: '1h', algorithm: 'HS256' } // <- bonne pratique
         );
 
         // Sanitize de l’objet utilisateur retourné: on retire le hash.
@@ -78,7 +71,7 @@ exports.login = async (req, res, next) => {
             delete publicUser.password;
         }
 
-        // 200 est standard pour un login; 201 (Created) n’est pas faux mais moins courant ici.
+        // 200 est standard pour un login; 201 (Created) 
         res.status(201).json({ user: publicUser, token });
     } catch (e) {
         // Réponse générique en cas d'erreur inattendue.

@@ -8,15 +8,12 @@ function buildImageUrl(filename, req) {
   return `${req.protocol}://${req.get('host')}/images/${filename}`;
 }
 
-/**
- * GET /comments
- * Récupère la liste complète des commentaires.
- */
+// Récupère tous les commentaires.
 exports.getAll = async (req, res) => {
   try {
     let commentList = await Comment.findAll();
 
-    // Sanitize/format: on convertit en JSON brut et on remappe l’URL picture.
+    // on convertit en JSON brut et on remappe l’URL picture.
     commentList = commentList.map((c) => {
       const data = typeof c.toJSON === 'function' ? c.toJSON() : c;
       if (data.picture) data.picture = buildImageUrl(data.picture, req);
@@ -42,7 +39,6 @@ exports.getById = async (req, res) => {
       return res.status(404).json({ error: "Commentaire introuvable" });
     }
 
-    // Sanitize + format
     c = typeof c.toJSON === 'function' ? c.toJSON() : c;
     if (c.picture) c.picture = buildImageUrl(c.picture, req);
 
@@ -82,13 +78,8 @@ exports.create = async (req, res, next) => {
   }
 };
 
-/**
- * Met à jour un commentaire.
- * Sécurité:
- * - Autorisation: seul le propriétaire (user_id) doit pouvoir modifier.
- * - Vérifier la casse exacte de la propriété (user_id, pas user_Id).
- * - Renvoi 403 si l’utilisateur n’est pas autorisé.
- */
+
+//Update commentaire
 exports.update = async (req, res, next) => {
   try {
     let c = await Comment.findOne({
@@ -111,7 +102,6 @@ exports.update = async (req, res, next) => {
 
     await c.save();
 
-    // Sortie normalisée
     let out = typeof c.toJSON === 'function' ? c.toJSON() : c;
     if (out.picture) out.picture = buildImageUrl(out.picture, req);
 
@@ -121,22 +111,18 @@ exports.update = async (req, res, next) => {
   }
 };
 
-/**
- * DELETE /comments/:id
- * Supprime un commentaire.
- * - Renvoie 404 si déjà supprimé/inexistant.
- */
+//Supprime un commentaire
 exports.delete = async (req, res) => {
   try {
     const deletedCount = await Comment.destroy({
       where: { id: req.params.id }
     });
-
+    // Si aucun commentaire supprimé, on retourne 404
     if (!deletedCount) {
       return res.status(404).json({ error: "Commentaire introuvable" });
     }
 
-    // 200 + payload explicite (on peut aussi faire 204 No Content)
+    // 200 + payload explicite
     res.status(200).json({ deleted: true });
   } catch (e) {
     res.status(400).json({ error: "Impossible de supprimer ce commentaire" });
