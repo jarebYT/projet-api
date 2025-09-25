@@ -30,6 +30,7 @@ exports.signin = async (req, res, next) => {
     try {
         const hash = bcryptjs.hashSync(req.body.password,10);
         let user = await User.create({
+            username : req.body.username,
             email: req.body.email,
             password: hash
         });
@@ -43,7 +44,9 @@ exports.login = async (req, res, next) => {
     try {
         let user = await User.findOne({
             where: {
-                email: req.body.email
+                username: req.body.username,
+                email: req.body.email,
+                password: req.body.password
             }
         });
         if(!user){

@@ -16,7 +16,11 @@ app.use('/images', express.static(path.join(__dirname, "images")));
 
 app.use('/auth', userRoute);
 app.use('/comments', commentRoute);
+<<<<<<< Updated upstream
 app.use('/posts', postRoute);
 app.use('/users', authRoute);
+=======
+app.use('/post', postRoute);
+>>>>>>> Stashed changes
 
 module.exports = app;
